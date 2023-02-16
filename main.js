@@ -17,10 +17,6 @@ function createGrid(squaresPerSide) {
   container.style.gridTemplateColumns = `repeat(${squaresPerSide}, 1fr)`
 }
 
-function getSquares() {
-  return document.querySelectorAll('.container div');
-}
-
 function changeSquareColor() {
   const squares = getSquares();
   squares.forEach((square) => {
@@ -36,6 +32,10 @@ function clearCanvas() {
   button.addEventListener('click', () => {
     squares.forEach((square) => {
     square.classList.remove('color-changed');
-    });
+  });
   })
+}
+
+function getSquares() {
+  return document.querySelectorAll('.container div');
 }
