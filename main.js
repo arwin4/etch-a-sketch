@@ -20,7 +20,7 @@ function changeSquareColor() {
   const squares = document.querySelectorAll('.container div');
   squares.forEach((square) => {
     square.addEventListener('mouseover', () => {
-      square.classList.add('colorChanged');
+      square.classList.add('color-changed');
     });
   })
 }
