@@ -23,7 +23,7 @@ function changeSquareColor() {
     square.addEventListener('mouseover', () => {
       square.classList.add('color-changed');
     });
-  })
+  });
 }
 
 function clearCanvas() {
@@ -31,9 +31,9 @@ function clearCanvas() {
   const squares = getSquares();
   button.addEventListener('click', () => {
     squares.forEach((square) => {
-    square.classList.remove('color-changed');
+      square.classList.remove('color-changed');
+    });
   });
-  })
 }
 
 function getSquares() {
