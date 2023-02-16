@@ -16,8 +16,12 @@ function createGrid(squaresPerSide) {
   container.style.gridTemplateColumns = `repeat(${squaresPerSide}, 1fr)`
 }
 
+function getSquares() {
+  return document.querySelectorAll('.container div');
+}
+
 function changeSquareColor() {
-  const squares = document.querySelectorAll('.container div');
+  const squares = getSquares();
   squares.forEach((square) => {
     square.addEventListener('mouseover', () => {
       square.classList.add('color-changed');
