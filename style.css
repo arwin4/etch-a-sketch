@@ -1,0 +1,11 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(20, 1fr);
+    grid-template-rows: repeat(20, 1fr);
+    width: 960px;
+    height: 960px;
+}
+
+.container > div {
+    border: 1px solid black;
+}
