@@ -3,6 +3,7 @@ const squaresPerSide = 15;
 
 createGrid(squaresPerSide);
 changeSquareColor();
+clearCanvas();
 
 function createGrid(squaresPerSide) {
   // Create the divs, then put them in a grid.
