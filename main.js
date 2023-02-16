@@ -24,3 +24,13 @@ function changeSquareColor() {
     });
   })
 }
+
+function clearCanvas() {
+  const button = document.querySelector('.clear-canvas');
+  const squares = getSquares();
+  button.addEventListener('click', () => {
+    squares.forEach((square) => {
+    square.classList.remove('color-changed');
+    });
+  })
+}
