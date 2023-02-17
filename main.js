@@ -54,7 +54,7 @@ function setNewCanvasListener() {
 
 function showPrompt() {
   squaresPerSide = prompt(
-    'Enter the number of squares each side of the canvas should have:', 50);
+    'Enter the number of squares each side of the canvas should have:', 25);
   squaresPerSide = Math.round(squaresPerSide);
 
   // Prompt again if input is invalid
