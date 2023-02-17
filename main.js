@@ -6,7 +6,7 @@ setNewCanvasListener();
 
 function initializeGrid(squaresPerSide) {
   drawGrid(squaresPerSide);
-  changeSquareColor();
+  paint();
   preventDragging();
 }
 
@@ -33,7 +33,7 @@ function preventDragging() {
   });
 }
 
-function changeSquareColor() {
+function paint() {
   /* Paint when mouse is on div and pressed down,
   and also when mouse is held down and moved over next div. */
   const squares = getSquares();
