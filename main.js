@@ -38,6 +38,8 @@ function showPrompt() {
   squaresPerSide = prompt(
     'Enter the number of squares each side of the canvas should have:', 50);
   squaresPerSide = Math.round(squaresPerSide);
+
+  // Prompt again if input is invalid
   if (checkValidSquareNumber(squaresPerSide)) {
     drawNewCanvas(squaresPerSide);
   }
@@ -58,10 +60,9 @@ function getSquares() {
 }
 
 function checkValidSquareNumber(squaresPerSide) {
-  // Prompt again if input is invalid
   if (
     Number.isInteger(squaresPerSide)
-    && squaresPerSide <= 100
+    && squaresPerSide <= 100 // Larger numbers might make browser unstable
     && squaresPerSide > 0
   ) {
     return true;
