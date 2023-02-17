@@ -1,9 +1,13 @@
+/* TODO: Change drawing mechanism to use canvas. This will alleviate the problem
+that not all squares are drawn when the cursor moves quickly. */
+
 initializeGrid(squaresPerSide = 50);
 setNewCanvasListener();
 
 function initializeGrid(squaresPerSide) {
   drawGrid(squaresPerSide);
   changeSquareColor();
+  preventDragging();
 }
 
 function drawGrid(squaresPerSide) {
@@ -21,11 +25,20 @@ function drawGrid(squaresPerSide) {
   container.style.gridTemplateColumns = `repeat(${squaresPerSide}, 1fr)`
 }
 
-function changeSquareColor() {
+function preventDragging() {
+  // Prevent dragging on divs
   const squares = getSquares();
   squares.forEach((square) => {
-    square.addEventListener('mouseover', () => {
-      square.classList.add('color-changed');
+    square.addEventListener('dragstart', (e) => e.preventDefault());
+  });
+}
+
+function changeSquareColor() {
+  // Paint when mouse is on div and pressed down
+  const squares = getSquares();
+    squares.forEach((square) => {
+    square.addEventListener('mouseover', (e) => {
+      if (e.buttons === 1) square.classList.add('color-changed');
     });
   });
 }
