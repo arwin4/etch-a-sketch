@@ -1,10 +1,9 @@
 const container = document.querySelector('.container');
-let squaresPerSide = 15;
 
-initializeGrid();
+initializeGrid(squaresPerSide = 50);
 newCanvas();
 
-function initializeGrid() {
+function initializeGrid(squaresPerSide) {
   drawGrid(squaresPerSide);
   changeSquareColor();
 }
@@ -37,7 +36,8 @@ function newCanvas() {
     `Enter the number of squares each side of the canvas should have:`, '50');
     squares = getSquares();
     squares.forEach((square) => square.remove());
-    initializeGrid();
+
+    initializeGrid(squaresPerSide);
   });
 }
 
