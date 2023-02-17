@@ -1,7 +1,7 @@
 const container = document.querySelector('.container');
 
 initializeGrid(squaresPerSide = 50);
-newCanvas();
+setNewCanvasListener();
 
 function initializeGrid(squaresPerSide) {
   drawGrid(squaresPerSide);
@@ -29,18 +29,41 @@ function changeSquareColor() {
   });
 }
 
-function newCanvas() {
+function setNewCanvasListener() {
   const button = document.querySelector('.new-canvas');
-  button.addEventListener('click', () => {
-    squaresPerSide = prompt(
-    `Enter the number of squares each side of the canvas should have:`, '50');
-    squares = getSquares();
-    squares.forEach((square) => square.remove());
+  button.addEventListener('click', () => showPrompt());
+}
 
-    initializeGrid(squaresPerSide);
-  });
+function showPrompt() {
+  squaresPerSide = prompt(
+    'Enter the number of squares each side of the canvas should have:', 50);
+  squaresPerSide = Math.round(squaresPerSide);
+  if (checkValidSquareNumber(squaresPerSide)) {
+    drawNewCanvas(squaresPerSide);
+  }
+}
+
+function drawNewCanvas(squaresPerSide) {
+  squares = getSquares();
+  squares.forEach((square) => square.remove());
+  initializeGrid(squaresPerSide);
 }
 
 function getSquares() {
   return document.querySelectorAll('.container div');
+}
+
+function checkValidSquareNumber(squaresPerSide) {
+  // Prompt again if input is invalid
+  if (
+    Number.isInteger(squaresPerSide)
+    && squaresPerSide <= 100
+    && squaresPerSide > 0
+  ) {
+    return true;
+  }
+  else {
+    alert('Please enter a number between 1 and 100.');
+    showPrompt();
+  };
 }
