@@ -2,7 +2,6 @@
 - Change drawing mechanism to use canvas. This will alleviate the problem
 that not all squares are drawn when the cursor moves quickly.
 - Enable painting by default.
-- Merge setListener functions of buttons.
 - Display current painting mode.
 */
 
@@ -38,9 +37,14 @@ function preventDragging() {
 }
 
 function attachButtonEventListeners() {
-  setPaintListener();
-  setEraseListener();
-  setNewCanvasListener();
+  const paintButton = document.querySelector('.paint');
+  paintButton.addEventListener('click', () => changeSquare('paint'));
+
+  const eraseButton = document.querySelector('.eraser');
+  eraseButton.addEventListener('click', () => changeSquare('erase'));
+
+  const newCanvasButton = document.querySelector('.new-canvas');
+  newCanvasButton.addEventListener('click', () => showPrompt());
 }
 
 function changeSquare(paintMode) {
@@ -58,30 +62,6 @@ function changeSquare(paintMode) {
       else if ((paintMode === 'erase') && (e.buttons === 1)) unpaintSquare(square);
     });
   });
-}
-
-function paintSquare(square) {
-  // Use .add, not .toggle because .add causes unintentional unpainting
-  square.classList.add('color-changed');
-}
-
-function unpaintSquare(square) {
-  square.classList.remove('color-changed');
-}
-
-function setPaintListener() {
-  const button = document.querySelector('.paint');
-  button.addEventListener('click', () => changeSquare('paint'));
-}
-
-function setEraseListener() {
-  const button = document.querySelector('.eraser');
-  button.addEventListener('click', () => changeSquare('erase'));
-}
-
-function setNewCanvasListener() {
-  const button = document.querySelector('.new-canvas');
-  button.addEventListener('click', () => showPrompt());
 }
 
 function showPrompt() {
@@ -103,6 +83,15 @@ function drawNewCanvas(squaresPerSide) {
   squares = getSquares();
   squares.forEach((square) => square.remove());
   initializeGrid(squaresPerSide);
+}
+
+function paintSquare(square) {
+  // Use .add, not .toggle because .add causes unintentional unpainting
+  square.classList.add('color-changed');
+}
+
+function unpaintSquare(square) {
+  square.classList.remove('color-changed');
 }
 
 function getSquares() {
