@@ -1,12 +1,16 @@
-/* TODO: Change drawing mechanism to use canvas. This will alleviate the problem
-that not all squares are drawn when the cursor moves quickly. */
+/* TODO: 
+- Change drawing mechanism to use canvas. This will alleviate the problem
+that not all squares are drawn when the cursor moves quickly.
+- Enable painting by default.
+- Merge setListener functions of buttons.
+- Display current painting mode.
+*/
 
 initializeGrid(squaresPerSide = 25);
-attachEventListeners();
+attachButtonEventListeners();
 
 function initializeGrid(squaresPerSide) {
   drawGrid(squaresPerSide);
-  paint();
   preventDragging();
 }
 
@@ -33,40 +37,46 @@ function preventDragging() {
   });
 }
 
-function paint() {
-  /* Paint when mouse is on div and pressed down,
-  and also when mouse is held down and moved over next div. */
-  const squares = getSquares();
-  squares.forEach((square) => {
-    square.addEventListener('mouseover', (e) => {
-      if (e.buttons === 1) square.classList.add('color-changed');
-    });
-    square.addEventListener('mousedown', () => {
-      square.classList.add('color-changed');
-    });
-  });
-}
-
-function erase() {
-  const squares = getSquares();
-  squares.forEach((square) => {
-    square.addEventListener('mouseover', (e) => {
-      if (e.buttons === 1) square.classList.remove('color-changed');
-    });
-    square.addEventListener('mousedown', () => {
-      square.classList.remove('color-changed');
-    });
-  });
-}
-
-function attachEventListeners() {
+function attachButtonEventListeners() {
+  setPaintListener();
   setEraseListener();
   setNewCanvasListener();
 }
 
+function changeSquare(paintMode) {
+  /* Paint/unpaint when mouse is on div and pressed down,
+ and also when mouse is held down and moved over next div. */
+  const squares = getSquares();
+
+  squares.forEach((square) => {
+    square.addEventListener('mousedown', () => {
+      if (paintMode === 'paint') paintSquare(square);
+      else if (paintMode === 'erase') unpaintSquare(square);
+    });
+    square.addEventListener('mouseover', (e) => {
+      if ((paintMode === 'paint') && (e.buttons === 1)) paintSquare(square);
+      else if ((paintMode === 'erase') && (e.buttons === 1)) unpaintSquare(square);
+    });
+  });
+}
+
+function paintSquare(square) {
+  // Use .add, not .toggle because .add causes unintentional unpainting
+  square.classList.add('color-changed');
+}
+
+function unpaintSquare(square) {
+  square.classList.remove('color-changed');
+}
+
+function setPaintListener() {
+  const button = document.querySelector('.paint');
+  button.addEventListener('click', () => changeSquare('paint'));
+}
+
 function setEraseListener() {
   const button = document.querySelector('.eraser');
-  button.addEventListener('click', () => erase());
+  button.addEventListener('click', () => changeSquare('erase'));
 }
 
 function setNewCanvasListener() {
