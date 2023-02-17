@@ -2,7 +2,7 @@
 that not all squares are drawn when the cursor moves quickly. */
 
 initializeGrid(squaresPerSide = 25);
-setNewCanvasListener();
+attachEventListeners();
 
 function initializeGrid(squaresPerSide) {
   drawGrid(squaresPerSide);
@@ -45,6 +45,28 @@ function paint() {
       square.classList.add('color-changed');
     });
   });
+}
+
+function erase() {
+  const squares = getSquares();
+  squares.forEach((square) => {
+    square.addEventListener('mouseover', (e) => {
+      if (e.buttons === 1) square.classList.remove('color-changed');
+    });
+    square.addEventListener('mousedown', () => {
+      square.classList.remove('color-changed');
+    });
+  });
+}
+
+function attachEventListeners() {
+  setEraseListener();
+  setNewCanvasListener();
+}
+
+function setEraseListener() {
+  const button = document.querySelector('.eraser');
+  button.addEventListener('click', () => erase());
 }
 
 function setNewCanvasListener() {
