@@ -41,6 +41,10 @@ function showPrompt() {
   if (checkValidSquareNumber(squaresPerSide)) {
     drawNewCanvas(squaresPerSide);
   }
+  else {
+      alert('Please enter a number between 1 and 100.');
+      showPrompt();
+  }
 }
 
 function drawNewCanvas(squaresPerSide) {
@@ -62,8 +66,5 @@ function checkValidSquareNumber(squaresPerSide) {
   ) {
     return true;
   }
-  else {
-    alert('Please enter a number between 1 and 100.');
-    showPrompt();
-  };
+  else return false;
 }
