@@ -1,11 +1,15 @@
 const container = document.querySelector('.container');
-const squaresPerSide = 15;
+let squaresPerSide = 15;
 
-createGrid(squaresPerSide);
-changeSquareColor();
-clearCanvas();
+initializeGrid();
+newCanvas();
 
-function createGrid(squaresPerSide) {
+function initializeGrid() {
+  drawGrid(squaresPerSide);
+  changeSquareColor();
+}
+
+function drawGrid(squaresPerSide) {
   // Create the divs, then put them in a grid.
   const numDivs = squaresPerSide ** 2;
   for (let i = 0; i < numDivs; i++) {
@@ -26,13 +30,14 @@ function changeSquareColor() {
   });
 }
 
-function clearCanvas() {
-  const button = document.querySelector('.clear-canvas');
-  const squares = getSquares();
+function newCanvas() {
+  const button = document.querySelector('.new-canvas');
   button.addEventListener('click', () => {
-    squares.forEach((square) => {
-      square.classList.remove('color-changed');
-    });
+    squaresPerSide = prompt(
+    `Enter the number of squares each side of the canvas should have:`, '50');
+    squares = getSquares();
+    squares.forEach((square) => square.remove());
+    initializeGrid();
   });
 }
 
