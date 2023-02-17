@@ -1,5 +1,3 @@
-const container = document.querySelector('.container');
-
 initializeGrid(squaresPerSide = 50);
 setNewCanvasListener();
 
@@ -9,12 +7,15 @@ function initializeGrid(squaresPerSide) {
 }
 
 function drawGrid(squaresPerSide) {
+  const container = document.querySelector('.container');
+
   // Create the divs, then put them in a grid.
   const numDivs = squaresPerSide ** 2;
   for (let i = 0; i < numDivs; i++) {
     const div = document.createElement('div');
     container.appendChild(div);
   }
+  
   /* The divs don't have an explicit shape yet.
   Here they're placed in an implicit grid such that they become square. */
   container.style.gridTemplateColumns = `repeat(${squaresPerSide}, 1fr)`
