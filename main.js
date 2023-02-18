@@ -11,6 +11,7 @@ attachButtonEventListeners();
 function initializeGrid(squaresPerSide) {
   drawGrid(squaresPerSide);
   preventDragging();
+  changeSquare('paint'); // Enables painting mode by default
 }
 
 function drawGrid(squaresPerSide) {
