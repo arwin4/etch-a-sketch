@@ -54,12 +54,20 @@ function changeSquare(paintMode) {
 
   squares.forEach((square) => {
     square.addEventListener('mousedown', () => {
-      if (paintMode === 'paint') paintSquare(square);
-      else if (paintMode === 'erase') unpaintSquare(square);
+      if (paintMode === 'paint') {
+        paintSquare(square);
+      }
+      else if (paintMode === 'erase') {
+        unpaintSquare(square);
+      }
     });
     square.addEventListener('mouseover', (e) => {
-      if ((paintMode === 'paint') && (e.buttons === 1)) paintSquare(square);
-      else if ((paintMode === 'erase') && (e.buttons === 1)) unpaintSquare(square);
+      if ((paintMode === 'paint') && (e.buttons === 1)) {
+        paintSquare(square);
+      }
+      else if ((paintMode === 'erase') && (e.buttons === 1)) {
+        unpaintSquare(square);
+      }
     });
   });
 }
