@@ -2,6 +2,7 @@
 - Change drawing mechanism to use canvas. This will alleviate the problem
 that not all squares are drawn when the cursor moves quickly.
 - Display current painting mode.
+- Color picker.
 */
 
 initializeGrid(squaresPerSide = 25);
@@ -40,6 +41,9 @@ function attachButtonEventListeners() {
   const paintButton = document.querySelector('.paint');
   paintButton.addEventListener('click', () => changeSquare('paint'));
 
+  const paintRainbowButton = document.querySelector('.rainbow');
+  paintRainbowButton.addEventListener('click', () => changeSquare('rainbow'));
+
   const eraseButton = document.querySelector('.eraser');
   eraseButton.addEventListener('click', () => changeSquare('erase'));
 
@@ -57,6 +61,9 @@ function changeSquare(paintMode) {
       if (paintMode === 'paint') {
         paintSquare(square);
       }
+      else if (paintMode === 'rainbow') {
+        paintSquareRainbow(square);
+      }
       else if (paintMode === 'erase') {
         unpaintSquare(square);
       }
@@ -64,6 +71,9 @@ function changeSquare(paintMode) {
     square.addEventListener('mouseover', (e) => {
       if ((paintMode === 'paint') && (e.buttons === 1)) {
         paintSquare(square);
+      }
+      else if (paintMode === 'rainbow' && (e.buttons === 1)) {
+        paintSquareRainbow(square);
       }
       else if ((paintMode === 'erase') && (e.buttons === 1)) {
         unpaintSquare(square);
@@ -104,11 +114,17 @@ function drawNewCanvas(squaresPerSide) {
 
 function paintSquare(square) {
   // Use .add, not .toggle because .add causes unintentional unpainting
-  square.classList.add('color-changed');
+  square.style['background-color'] = 'black';
+}
+
+function paintSquareRainbow(square) {
+  // Credit https://css-tricks.com/snippets/javascript/random-hex-color/
+  const randomColor = Math.floor(Math.random()*16777215).toString(16);
+  square.style['background-color'] = "#" + randomColor;
 }
 
 function unpaintSquare(square) {
-  square.classList.remove('color-changed');
+  square.style['background-color'] = '#f0f2eb';
 }
 
 function getSquares() {
