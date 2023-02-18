@@ -1,7 +1,6 @@
 /* TODO: 
 - Change drawing mechanism to use canvas. This will alleviate the problem
 that not all squares are drawn when the cursor moves quickly.
-- Enable painting by default.
 - Display current painting mode.
 */
 
@@ -75,7 +74,8 @@ function changeSquare(paintMode) {
 
 function showPrompt() {
   squaresPerSide = prompt(
-    'Enter the number of squares each side of the canvas should have:', 25);
+    'Enter the number of squares each side of the canvas should have:',
+     squaresPerSide);
   squaresPerSide = Math.round(squaresPerSide);
 
   // Prompt again if input is invalid
