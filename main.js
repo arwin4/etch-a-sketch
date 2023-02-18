@@ -75,7 +75,14 @@ function changeSquare(paintMode) {
 function showPrompt() {
   squaresPerSide = prompt(
     'Enter the number of squares each side of the canvas should have:',
-     squaresPerSide);
+    squaresPerSide);
+
+  // Exit prompt if user cancels
+  if (squaresPerSide === null) {
+    squaresPerSide = 25;
+    return;
+  }
+
   squaresPerSide = Math.round(squaresPerSide);
 
   // Prompt again if input is invalid
