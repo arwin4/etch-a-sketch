@@ -83,6 +83,7 @@ function showPrompt() {
     drawNewCanvas(squaresPerSide);
   }
   else {
+    squaresPerSide = 25;
     alert('Please enter a number between 1 and 100.');
     showPrompt();
   }
